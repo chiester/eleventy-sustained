@@ -2,16 +2,65 @@
 layout: layouts/base.html
 ---
 
+
 <section id="about">
-	<div class="container">
-	  <div class="avatar">
-		<img class="img-circle" src="/static/img/{{ site.avatar }}" alt="Responsive image">
-	  </div>
-	  <h3>I'm <strong>{{ site.author }}</strong>, a programmer and documentarian.</h3>
-	  <h3>I <a href="https://en.wikipedia.org/wiki/Adele_Goldstine">wrote the book</a> on ENIAC computing.</h3>
-	  <h3>Have a look at some of my working <a href="/projects"> projects</a>.</h3>
-	  <h3>For more, check out my academic &amp; professional <a href="{{ site.resume }}">resume</a>.</h3>
-	  <h3>Contact me at <a href="http://twitter.com/{{ site.twitter }}">@{{ site.twitter }}</a> or by <a href="mailto:{{ site.email }}">email</a>.</h3>
-	  {% include social.html %}
-	</div>
+  <div class="container">
+    <div id="clock"></div>
+    <div class="avatar">
+      <img
+        class="img-circle"
+        src="/static/img/{{ site.avatar }}"
+        alt="Responsive image"
+      />
+    </div>
+    <h3>
+      I'm <strong>{{ site.author }}</strong>, a programmer and documentarian.
+    </h3>
+    <h3>
+      I
+      <a href="https://en.wikipedia.org/wiki/Adele_Goldstine">wrote the book</a>
+      on ENIAC computing.
+    </h3>
+    <h3>
+      Have a look at some of my working <a href="/projects"> projects</a>.
+    </h3>
+    <h3>
+      For more, check out my academic &amp; professional
+      <a href="{{ site.resume }}">resume</a>.
+    </h3>
+    <h3>
+      Contact me at
+      <a href="http://twitter.com/{{ site.twitter }}">@{{ site.twitter }}</a> or
+      by <a href="mailto:{{ site.email }}">email</a>.
+    </h3>
+    {% include social.html %}
+  </div>
 </section>
+
+
+<script>
+	let clock = () => {
+	  let date = new Date();
+	  console.log(date)
+	  let hrs = date.getHours();
+	  let mins = date.getMinutes();
+	  let secs = date.getSeconds();
+	  let period = "AM";
+	  if (hrs == 0) {
+		hrs = 12;
+	  } else if (hrs >= 12) {
+		hrs = hrs - 12;
+		period = "PM";
+	  }
+	  hrs = hrs < 10 ? "0" + hrs : hrs;
+	  mins = mins < 10 ? "0" + mins : mins;
+	  secs = secs < 10 ? "0" + secs : secs;
+  
+	  let time = `${hrs}:${mins}:${secs}:${period}`;
+	  console.log(time)
+	  document.getElementById("clock").innerHTML = time;
+	  setTimeout(clock, 1000);
+	};
+  
+	clock();
+  </script>
